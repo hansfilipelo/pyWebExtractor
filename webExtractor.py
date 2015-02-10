@@ -4,19 +4,84 @@
 # Creators: Jens Edhammer and Hans-Filip Elo
 
 import sys
-import os
+from os import listdir
+from os.path import join,isfile
+import textwrap
 
-def createFolderInterface(source, target):
-    for files in os.listdir(source):
-        if not files.startswith("."):
-            print(files)
+def listSourceDir(source):
+    return [files for files in listdir(source) if not files.startswith(".")]
 
-    print('\n' + "Break" + '\n')
+# -------------------------
 
-    for dirOnly in os.listdir(target):
-        if not os.path.isfile(os.path.join(target,dirOnly)):
-            if not dirOnly.startswith("."):
-                print(dirOnly)
+def listTargetDir(target):
+    return [dirOnly for dirOnly in listdir(target) if not isfile(join(target,dirOnly)) and not dirOnly.startswith(".")]
 
+# -------------------------
 
-createFolderInterface(".","/home/fille/")
+def tableFromList(inList):
+    output = "<table>" + '\n'
+
+    htmlTableStart = textwrap.dedent("""\
+        <tr>
+            <td>
+    """)
+    htmlTableEnd = textwrap.dedent("""\
+            </td>
+        </tr>
+    """)
+
+    for data in inList:
+        output += (htmlTableStart + data + htmlTableEnd)
+
+    return output + "</table>"
+
+# -------------------------
+
+def returnHeader():
+    return textwrap.dedent("""\
+            <!DOCTYPE html>
+            <html>
+
+            <head>
+
+            </head
+            <!-- ------------ -->
+            <body>
+            """)
+
+# -------------------------
+
+def returnFooter():
+    return (textwrap.dedent("""\
+            </body>
+
+            </html>
+            """))
+
+# -------------------------
+
+def startTable():
+    return textwrap.dedent("""\
+            <table>
+                <tr>
+                    <td>
+            """)
+
+# -------------------------
+
+def midTable():
+    return (textwrap.dedent("""\
+                    </td>
+                    <td>
+                    """))
+
+# -------------------------
+
+def endTable():
+    return textwrap.dedent("""\
+                        </td>
+                    </tr>
+                </table>
+                """)
+
+# -------------------------
