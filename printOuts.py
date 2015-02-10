@@ -3,7 +3,6 @@
 # Purpose: Generates "commander" file interface in HTML
 # Creators: Jens Edhammer and Hans-Filip Elo
 
-import sys
 from os import listdir
 from os.path import join,isfile
 import textwrap
