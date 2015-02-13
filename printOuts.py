@@ -28,9 +28,17 @@ def tableFromList(inList):
             </td>
         </tr>
     """)
+    linkStart = linkData = textwrap.dedent("""\
+            <a href="#q=
+    """)
+    linkEnd = textwrap.dedent("""\
+        </a>
+    """)
 
     for data in inList:
-        output += (htmlTableStart + data + htmlTableEnd)
+
+        linkData = linkStart + data + """">""" + data + linkEnd
+        output += (htmlTableStart + linkData + htmlTableEnd)
 
     return output + "</table>"
 
